@@ -1,6 +1,5 @@
 package test;
 
-import asd.AF.AbstractArgumentationFramework;
 import asd.AF.IncompleteAbstractArgumentationFramework;
 import asd.Argument.AbstractArgument;
 import asd.Argument.Argument;
@@ -10,19 +9,19 @@ import asd.Argument.Relation;
 import java.util.LinkedList;
 import java.util.List;
 
-public class test1 {
+public class test2 {
     public static void main(String ... args){
-        AbstractArgument a1 = new Argument("a");
-        AbstractArgument c1 = new Argument("c");
-        AbstractArgument a2 = new Argument("b");
-        AbstractArgument b1  = new Argument("d");
+        AbstractArgument a1 = new IncompleteArgument("a", IncompleteArgument.type.CERTAIN);
+        AbstractArgument c1 = new IncompleteArgument("b", IncompleteArgument.type.CERTAIN);
+        AbstractArgument a2 = new IncompleteArgument("c", IncompleteArgument.type.CERTAIN);
+        AbstractArgument b1  = new IncompleteArgument("d", IncompleteArgument.type.CERTAIN);
 
         Relation r1 = new Relation(a1, a2);
         Relation r2 = new Relation(a1, c1);
         Relation r3 = new Relation(a2, b1);
         Relation r4 = new Relation(c1, a2);
 
-       AbstractArgumentationFramework AAF = new AbstractArgumentationFramework();
+        IncompleteAbstractArgumentationFramework AAF = new IncompleteAbstractArgumentationFramework();
 
         AAF.addArgument(a1);AAF.addArgument(a2);
         AAF.addArgument(c1);

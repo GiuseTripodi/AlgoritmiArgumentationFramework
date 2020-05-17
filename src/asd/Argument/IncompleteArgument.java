@@ -15,8 +15,8 @@ public class IncompleteArgument extends AbstractArgument {
         this.tipo = tipo;
     }
 
-    public String getType(){
-        return "The type is:" + tipo.toString();
+    public type getType(){
+        return tipo;
     }
 
     public boolean equals(Object o){
