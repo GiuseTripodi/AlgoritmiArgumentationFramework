@@ -1,4 +1,4 @@
-package Algoritmo1;
+package asd;
 
 public class algoritmo1 {
 }
