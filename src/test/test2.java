@@ -37,7 +37,7 @@ public class test2 {
 
         List<Relation> l = new LinkedList<>();l.add(r3);l.add(r4);
         AAF.addArgsAndRelations(a2, l);
-        System.out.println(AAF);
+        System.out.println(AAF.getArguments());
 
 
 

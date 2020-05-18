@@ -78,6 +78,11 @@ public class AbstractArgumentationFramework extends  AbstractAF {
     }
 
 
+    public List<Argument> getArguments(){
+        return A;
+    }
+
+
     public List<Relation> getRelations(){
         return R;
     }

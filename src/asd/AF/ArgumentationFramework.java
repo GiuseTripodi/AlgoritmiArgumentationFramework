@@ -85,6 +85,17 @@ public interface ArgumentationFramework {
 
 
     /**
+     * Il metodo restituisce una lista di tutti gli argomenti
+     * @param <T>
+     * @return
+     */
+    <T> List<T> getArguments();
+
+    <T> List<T> getRelations();
+
+
+
+    /**
      *
      * @return il numero di argomenti presenti nell' AF.
      */

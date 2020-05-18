@@ -141,6 +141,20 @@ public class IncompleteAbstractArgumentationFramework extends AbstractAF{
 
     }
 
+    public List<IncompleteArgument> getArguments(){
+        LinkedList<IncompleteArgument> ret = new LinkedList<>();
+        ret.addAll(Ac);
+        ret.addAll(Au);
+        return ret;
+    }
+
+    public List<Relation> getRelations(){
+        LinkedList<Relation> ret = new LinkedList<>();
+        ret.addAll(Rc);
+        ret.addAll(Ru);
+        return ret;
+    }
+
 
     public ListIterator<IncompleteArgument> listIteratorArgument(){
         LinkedList<IncompleteArgument> ret = new LinkedList<>();
