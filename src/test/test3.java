@@ -1,6 +1,7 @@
 package test;
 
 import asd.AF.AbstractArgumentationFramework;
+import asd.AF.ArgumentationFramework;
 import asd.Argument.AbstractArgument;
 import asd.Argument.Argument;
 import asd.Argument.Relation;
@@ -20,7 +21,7 @@ public class test3 {
         Relation dc = new Relation(d, c);
         Relation ca = new Relation(c, a);
 
-        AbstractArgumentationFramework AF = new AbstractArgumentationFramework();
+       ArgumentationFramework AF = new AbstractArgumentationFramework();
         AF.addArgument(a);AF.addArgument(b);AF.addArgument(c);AF.addArgument(d);
 
         AF.addInteraction(ab);AF.addInteraction(dc);AF.addInteraction(ca);
@@ -32,5 +33,12 @@ public class test3 {
         List<AbstractArgument> S = new LinkedList<>(); S.add((Argument)d);
 
         System.out.println(s.acceptable(a, S, AF));
+
+        //S.add(c);
+        System.out.println(s.conflictFree(AF,S));
+
+        System.out.println(s.admissible(AF,S));
+
+
     }
 }

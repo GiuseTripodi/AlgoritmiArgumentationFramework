@@ -28,8 +28,9 @@ public abstract class AbstractArgument {
         if (this == o) return true;
         if(o instanceof AbstractArgument){
             AbstractArgument a = (AbstractArgument)o;
-            if(a.getValue().equals(this.getValue()))
+            if(a.getValue().equals(this.getValue())){
                 return true;
+            }
         }
         return false;
     }

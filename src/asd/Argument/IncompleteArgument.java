@@ -19,14 +19,21 @@ public class IncompleteArgument extends AbstractArgument {
         return tipo;
     }
 
-    public boolean equals(Object o){
+
+    /**
+     * L'algoritmo confornta due Incomplete Argument.
+     * @param o
+     * @return
+     */
+    public boolean confronta(Object o){
         if(o instanceof IncompleteArgument){
             IncompleteArgument i = (IncompleteArgument)o;
-            boolean a = i.getType().equals(this.getType());
+            boolean a = i.getType() == this.getType();
             return super.equals(o) && a;
         }
         return false;
     }
+
 
     public String toString(){
         String ret = super.toString();

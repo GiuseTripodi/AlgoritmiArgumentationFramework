@@ -14,7 +14,7 @@ public class test1 {
     public static void main(String ... args){
         AbstractArgument a1 = new Argument("a");
         AbstractArgument c1 = new Argument("c");
-        AbstractArgument a2 = new Argument("b");
+        AbstractArgument a2 = new Argument("a");
         AbstractArgument b1  = new Argument("d");
 
         Relation r1 = new Relation(a1, a2);
@@ -39,6 +39,8 @@ public class test1 {
         List<Relation> l = new LinkedList<>();l.add(r3);l.add(r4);
         AAF.addArgsAndRelations(a2, l);
         System.out.println(AAF.getArguments());
+
+        System.out.println(AAF.getArguments().contains(c1));
 
 
 

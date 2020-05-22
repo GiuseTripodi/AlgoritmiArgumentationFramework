@@ -25,28 +25,32 @@ public class IncompleteAbstractArgumentationFramework extends AbstractAF{
         this.Rc = new LinkedList<>();
         this.Ru = new LinkedList<>();
     }
+    public IncompleteAbstractArgumentationFramework(List<IncompleteArgument> Ac, List<IncompleteArgument> Au, List<Relation> Rc,  List<Relation> Ru){
+        this.Ac = Ac;
+        this.Au = Au;
+        this.Rc = Rc;
+        this.Ru = Ru;
+    }
 
     /**
      * Il metodo aggiunge una relazione, l'insieme di aggiunta della relazione
-     * è determinata dal tipo degli argomenti coinvolti nella relazione
+     * è determinata tipo riportato.
      * @param relation è la relazione da aggiungere
      * @return true se l'aggiunta va a buon fine, false altrimenti
      */
-    public boolean addInteraction(Relation relation){
-        if(Ru.contains(relation) || Rc.contains(relation))
+    public boolean addTypeInteraction(Relation relation, IncompleteArgument.type tipo){
+        if(Rc.contains(relation) || Ru.contains(relation))
             return false;
-        IncompleteArgument first = (IncompleteArgument)relation.getFirst();
-        IncompleteArgument second = (IncompleteArgument)relation.getSecond();
-
-
-        if(verificaCertain(first) && verificaCertain(second)){
-            Rc.add(relation);
-            return true;
-        }
-        if(verificaUncertain(first) && verificaUncertain(second)){
+        if(tipo == IncompleteArgument.type.UNCERTAIN)
             Ru.add(relation);
-            return true;
-        }
+        if(tipo == IncompleteArgument.type.CERTAIN)
+            Rc.add(relation);
+        return true;
+    }
+
+
+
+        public boolean addInteraction(Relation relation){
         return false;
     }//addInteraction
 
@@ -153,6 +157,10 @@ public class IncompleteAbstractArgumentationFramework extends AbstractAF{
         ret.addAll(Rc);
         ret.addAll(Ru);
         return ret;
+    }
+
+    public List<Relation> getCertainRelations(){
+        return Rc;
     }
 
 

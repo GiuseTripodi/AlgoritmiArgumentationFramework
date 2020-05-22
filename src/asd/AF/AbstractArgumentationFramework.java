@@ -20,6 +20,10 @@ public class AbstractArgumentationFramework extends  AbstractAF {
         this.A = new LinkedList<>();
         this.R = new LinkedList<>();
     }
+    public AbstractArgumentationFramework(List<Argument> A, List<Relation> R){
+        this.A = A;
+        this.R = R;
+    }
 
     /*
     L'aggiunta di una relazione è fattibile solo se gli argomenti coinvolti
@@ -94,5 +98,7 @@ public class AbstractArgumentationFramework extends  AbstractAF {
     public ListIterator<Relation> listIteratorRelation(){
         return R.listIterator();
     }
+
+
 
 }
