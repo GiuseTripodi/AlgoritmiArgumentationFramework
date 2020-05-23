@@ -159,14 +159,14 @@ public class SupportFunctions {
             if(! visitati.contains(ad))
                 return coreArgument(ad, cEx, visitati,IF,F,S);
         }
-        return false; //return fittizzia , non viene mai eseguita
+        return false; //return fittizia
     }//coreArgument
 
     private static List<AbstractArgument> adiacenti(AbstractArgument a, IncompleteAbstractArgumentationFramework IF){
         List<AbstractArgument> ret = new LinkedList<>();
         for(AbstractArgument b : IF.getArguments()){
             Relation r = new Relation(a,b);
-            if(IF.getRelations().contains(r))//controlla se ci devono essere vincoli sul tipo di relazione per definirla adiacente
+            if(IF.getRelations().contains(r))//
                 ret.add(b);
         }
         return  ret;

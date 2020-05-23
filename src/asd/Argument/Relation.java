@@ -1,8 +1,8 @@
 package asd.Argument;
 
 /**
- * Questa classe rappresenta il concetto di relazione nei AF, dove per relazione si inende una relazione binaria
- * tra due argomenti, dove il primo nell'insieme attacca il secondo.
+ * Questa classe rappresenta il concetto di relazione nei AF, dove per relazione si intende una relazione binaria
+ * tra due argomenti, dove il primo nell'insieme "attacca" il secondo.
  */
 
 

@@ -12,6 +12,12 @@ import java.util.List;
 
 public class algoritmo {
 
+    /**
+     * Il metodo implementa la costruzione della completion F = (A*, D*)
+     * @param IF
+     * @param S
+     * @return
+     */
     public static AbstractArgumentationFramework buildF(ArgumentationFramework IF, List<AbstractArgument> S){
         List<Argument> As;
         List<Relation> Ds = new LinkedList<>();
@@ -56,6 +62,12 @@ public class algoritmo {
         return ret;
     }//buildF
 
+    /**
+     * L'algoritmo risolve la verifica se S è una possibile i*-extensione sotto la complete semantics
+     * @param IF
+     * @param S
+     * @return
+     */
     public static boolean Algoritmo1(IncompleteAbstractArgumentationFramework IF, List<AbstractArgument> S){
         AbstractArgumentationFramework F = buildF(IF,S);
         List<AbstractArgument> CS = new LinkedList<>();
@@ -78,6 +90,7 @@ public class algoritmo {
             }//if
             a = find(F,S, CS);
         }//while
+        System.out.println(F);
         return SupportFunctions.completeExtension(F,S);
 
     }//Algoritmo 1

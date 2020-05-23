@@ -14,10 +14,8 @@ import java.util.ListIterator;
 public abstract class AbstractAF implements ArgumentationFramework {
 
     public String toString(){
-        //List<Argument> argomenti = this.getArguments();
         ListIterator<AbstractArgument> ita = this.listIteratorArgument();
 
-        //List<Relation> relazioni = this.getRelations();
         ListIterator<Relation> itr = this.listIteratorRelation();
 
         String ret = "";
