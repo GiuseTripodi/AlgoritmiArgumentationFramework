@@ -22,7 +22,7 @@ public class SupportFunctions {
      * @param AF
      * @return true se l'argomenti è accettabile
      */
-    public boolean acceptable(AbstractArgument a, List<AbstractArgument> S, ArgumentationFramework AF){
+    public static boolean acceptable(AbstractArgument a, List<AbstractArgument> S, ArgumentationFramework AF){
         List<AbstractArgument> A = AF.getArguments();
         List<Relation> R = AF.getRelations();
         for(AbstractArgument b : A){
@@ -44,7 +44,7 @@ public class SupportFunctions {
      * @param R
      * @return true se S R a
      */
-    private boolean Sattacksb(List<AbstractArgument> S, AbstractArgument b, List<Relation> R){
+    private static boolean Sattacksb(List<AbstractArgument> S, AbstractArgument b, List<Relation> R){
         for(AbstractArgument s : S){
             Relation r = new Relation(s, b);
             if(R.contains(r))
@@ -61,7 +61,7 @@ public class SupportFunctions {
      * @param S
      * @return
      */
-    public boolean conflictFree(ArgumentationFramework AF, List<AbstractArgument> S){
+    public static boolean conflictFree(ArgumentationFramework AF, List<AbstractArgument> S){
         List<Relation> R = AF.getRelations();
         for(AbstractArgument a : S){
             for(AbstractArgument b : S){
@@ -80,7 +80,7 @@ public class SupportFunctions {
      * @param S
      * @return
      */
-    public boolean admissible(ArgumentationFramework AF, List<AbstractArgument> S){
+    public static boolean admissible(ArgumentationFramework AF, List<AbstractArgument> S){
         if(conflictFree(AF,S)){
             for(AbstractArgument a : S){
                 if(! acceptable(a,S,AF))
@@ -100,7 +100,7 @@ public class SupportFunctions {
      * @param S
      * @return true se S è una complete extension
      */
-    public boolean completeExtension(ArgumentationFramework AF, List<AbstractArgument> S){
+    public static boolean completeExtension(ArgumentationFramework AF, List<AbstractArgument> S){
         if(admissible(AF, S)){
             List<AbstractArgument> A = AF.getArguments();
             for(AbstractArgument a : A){
@@ -123,13 +123,13 @@ public class SupportFunctions {
      * @param S
      * @return true se l'argomento a è un core argument
      */
-    public boolean coreArgument(AbstractArgument a, IncompleteAbstractArgumentationFramework IF, AbstractArgumentationFramework F, List<AbstractArgument> S){
+    public static boolean coreArgument(AbstractArgument a, IncompleteAbstractArgumentationFramework IF, AbstractArgumentationFramework F, List<AbstractArgument> S){
         LinkedList<AbstractArgument> cEx = new LinkedList<>();
         List<AbstractArgument> visitati = new LinkedList<>();
         return coreArgument(a,cEx, visitati, IF, F,S);
     }
 
-    private boolean coreArgument(AbstractArgument a , LinkedList<AbstractArgument> cEx, List<AbstractArgument> visitati,  IncompleteAbstractArgumentationFramework IF, AbstractArgumentationFramework F, List<AbstractArgument> S){
+    private static boolean coreArgument(AbstractArgument a , LinkedList<AbstractArgument> cEx, List<AbstractArgument> visitati,  IncompleteAbstractArgumentationFramework IF, AbstractArgumentationFramework F, List<AbstractArgument> S){
         if(! (F.getArguments().contains(a) && ! S.contains(a)))return false; // ! a appartiene ad A*/S
         cEx.add(a);
         visitati.add(a);
@@ -162,7 +162,7 @@ public class SupportFunctions {
         return false; //return fittizzia , non viene mai eseguita
     }//coreArgument
 
-    private List<AbstractArgument> adiacenti(AbstractArgument a, IncompleteAbstractArgumentationFramework IF){
+    private static List<AbstractArgument> adiacenti(AbstractArgument a, IncompleteAbstractArgumentationFramework IF){
         List<AbstractArgument> ret = new LinkedList<>();
         for(AbstractArgument b : IF.getArguments()){
             Relation r = new Relation(a,b);
@@ -172,7 +172,7 @@ public class SupportFunctions {
         return  ret;
     }
 
-    public List<AbstractArgument> CORE(IncompleteAbstractArgumentationFramework IF, AbstractArgumentationFramework F, List<AbstractArgument> S){
+    public static List<AbstractArgument> CORE(IncompleteAbstractArgumentationFramework IF, AbstractArgumentationFramework F, List<AbstractArgument> S){
         List<AbstractArgument> ret = new LinkedList<>();
         for(AbstractArgument a : F.getArguments()) {
             if (coreArgument(a, IF, F, S))

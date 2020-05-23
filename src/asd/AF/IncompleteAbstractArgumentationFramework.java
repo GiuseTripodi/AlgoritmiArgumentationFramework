@@ -163,6 +163,18 @@ public class IncompleteAbstractArgumentationFramework extends AbstractAF{
         return Rc;
     }
 
+    public List<Relation> getUncertainRelations(){
+        return Ru;
+    }
+
+    public List<IncompleteArgument> getCertainArgument(){
+        return Ac;
+    }
+
+    public List<IncompleteArgument> getUncertainArgument(){
+        return Au;
+    }
+
 
     public ListIterator<IncompleteArgument> listIteratorArgument(){
         LinkedList<IncompleteArgument> ret = new LinkedList<>();
