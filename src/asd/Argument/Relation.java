@@ -7,19 +7,19 @@ package asd.Argument;
 
 
 public class Relation {
-    private AbstractArgument first;
-    private AbstractArgument second;
+    private Argument first;
+    private Argument second;
 
-    public Relation(AbstractArgument f, AbstractArgument s){
+    public Relation(Argument f, Argument s){
         this.first = f;
         this.second = s;
     }
 
-    public AbstractArgument getFirst(){
+    public Argument getFirst(){
         return first;
     }
 
-    public AbstractArgument getSecond(){
+    public Argument getSecond(){
         return second;
     }
 

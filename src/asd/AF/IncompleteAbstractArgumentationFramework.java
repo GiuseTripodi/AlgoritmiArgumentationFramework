@@ -1,10 +1,9 @@
 package asd.AF;
 
-import asd.Argument.AbstractArgument;
 import asd.Argument.Argument;
-import asd.Argument.IncompleteArgument;
 import asd.Argument.Relation;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -14,10 +13,12 @@ import java.util.ListIterator;
  */
 
 public class IncompleteAbstractArgumentationFramework extends AbstractAF{
-    private List<IncompleteArgument> Ac; //argument certain
-    private List<IncompleteArgument> Au; //argument uncertain
-    private List<Relation> Rc; //relation certain, both the argument exist
-    private List<Relation> Ru; //relation, uncertain, both the argument are not sure
+    public enum type {CERTAIN, UNCERTAIN};//Ci sono due possibili tipi
+
+    private List<Argument> Ac; //argument certain
+    private List<Argument> Au; //argument uncertain
+    private List<Relation> Rc; //relation certain,
+    private List<Relation> Ru; //relation, uncertain,
 
     public IncompleteAbstractArgumentationFramework(){
         this.Ac = new LinkedList<>();
@@ -25,7 +26,7 @@ public class IncompleteAbstractArgumentationFramework extends AbstractAF{
         this.Rc = new LinkedList<>();
         this.Ru = new LinkedList<>();
     }
-    public IncompleteAbstractArgumentationFramework(List<IncompleteArgument> Ac, List<IncompleteArgument> Au, List<Relation> Rc,  List<Relation> Ru){
+    public IncompleteAbstractArgumentationFramework(List<Argument> Ac, List<Argument> Au, List<Relation> Rc,  List<Relation> Ru){
         this.Ac = Ac;
         this.Au = Au;
         this.Rc = Rc;
@@ -38,37 +39,16 @@ public class IncompleteAbstractArgumentationFramework extends AbstractAF{
      * @param relation è la relazione da aggiungere
      * @return true se l'aggiunta va a buon fine, false altrimenti
      */
-    public boolean addTypeInteraction(Relation relation, IncompleteArgument.type tipo){
+    public boolean addTypeInteraction(Relation relation, type tipo){
         if(Rc.contains(relation) || Ru.contains(relation))
             return false;
-        if(tipo == IncompleteArgument.type.UNCERTAIN)
+        if(tipo == type.UNCERTAIN)
             Ru.add(relation);
-        if(tipo == IncompleteArgument.type.CERTAIN)
+        if(tipo == type.CERTAIN)
             Rc.add(relation);
         return true;
     }
 
-
-
-        public boolean addInteraction(Relation relation){
-        return false;
-    }//addInteraction
-
-
-    /**
-     * Il metodo verifica l'appartenenza di un argomento ad un particolare insieme,
-     * in questo caso verifica se l'argomento è di tipo certain ed appartiene
-     * all'insieme degli argomenti certain;
-     * @param args
-     * @return boolean se è certain ed appartiene all'insieme certain
-     */
-    private boolean verificaCertain(IncompleteArgument args){
-        return args.getType() ==  IncompleteArgument.type.CERTAIN && Ac.contains(args);
-    }
-
-    private boolean verificaUncertain(IncompleteArgument args){
-        return args.getType() ==  IncompleteArgument.type.UNCERTAIN && Au.contains(args);
-    }
 
     /**
      * Il metodo rimuove un interaction in bae all insieme in cui appartiene
@@ -93,65 +73,39 @@ public class IncompleteAbstractArgumentationFramework extends AbstractAF{
      * @param a, argomento da aggiungere
      * @return true se l'aggiunta è andata a buon fine
      */
-    public boolean addArgument(AbstractArgument a){
-        IncompleteArgument ia = (IncompleteArgument)a;
-        if( verificaCertain(ia) || verificaUncertain(ia))
+    public boolean addTypeArgument(Argument a, type tipo){
+        if(Ac.contains(a) || Au.contains(a))
             return false;
-        if(ia.getType() == IncompleteArgument.type.CERTAIN){
-            Ac.add(ia);
-            return true;
+        if(tipo == type.UNCERTAIN)
+            Au.add(a);
+        if(tipo == type.CERTAIN)
+            Ac.add(a);
+        return true;
+    }
+
+
+    public boolean removeArgument(Argument a){
+        if(Au.contains(a)){
+            Au.remove(a);
+            return  true;
         }
-        if(ia.getType() == IncompleteArgument.type.UNCERTAIN){
-            Au.add(ia);
-            return true;
+        else if(Ac.contains(a)){
+            Ac.remove(a);
+            return  true;
         }
         return false;
-    }
-
-    /**
-     *
-     * @param a , argument da inserire
-     * @param r, insieme di che coinvolgono l'argomento
-     * @return
-     */
-    public boolean addArgsAndRelations(AbstractArgument a , List<Relation> r ){
-        this.addArgument(a);
-        for(Relation rel : r ){
-            if (rel.getSecond().equals(a) || rel.getFirst().equals(a))//inserisco solo le relazioni corrette
-                this.addInteraction(rel);
-        }
-        return true;
-    }
-
-    public boolean removeArgument(AbstractArgument a){
-        IncompleteArgument ia = (IncompleteArgument)a;
-        if( ! verificaCertain(ia) || ! verificaUncertain(ia))
-            return false;
-        if(ia.getType() == IncompleteArgument.type.CERTAIN){
-            Ac.remove(ia);
-            for(Relation r : Rc){
-                if (r.getSecond().equals(a) || r.getFirst().equals(a))
-                    this.removeInteraction(r);
-            }
-        }
-        if(ia.getType() == IncompleteArgument.type.UNCERTAIN){
-            Au.remove(ia);
-            for(Relation r : Ru){
-                if (r.getSecond().equals(a) || r.getFirst().equals(a))
-                    this.removeInteraction(r);
-            }
-        }
-        return true;
 
     }
 
-    public List<IncompleteArgument> getArguments(){
-        LinkedList<IncompleteArgument> ret = new LinkedList<>();
+    @Override
+    public List<Argument> getArguments(){
+        LinkedList<Argument> ret = new LinkedList<>();
         ret.addAll(Ac);
         ret.addAll(Au);
         return ret;
     }
 
+    @Override
     public List<Relation> getRelations(){
         LinkedList<Relation> ret = new LinkedList<>();
         ret.addAll(Rc);
@@ -167,17 +121,19 @@ public class IncompleteAbstractArgumentationFramework extends AbstractAF{
         return Ru;
     }
 
-    public List<IncompleteArgument> getCertainArgument(){
+    public List<Argument> getCertainArgument(){
         return Ac;
     }
 
-    public List<IncompleteArgument> getUncertainArgument(){
+    public List<Argument> getUncertainArgument(){
         return Au;
     }
 
 
-    public ListIterator<IncompleteArgument> listIteratorArgument(){
-        LinkedList<IncompleteArgument> ret = new LinkedList<>();
+
+
+    public ListIterator<Argument> listIteratorArgument(){
+        LinkedList<Argument> ret = new LinkedList<>();
         ret.addAll(Ac);
         ret.addAll(Au);
         return ret.listIterator();

@@ -1,9 +1,8 @@
 package test;
 
 import asd.AF.IncompleteAbstractArgumentationFramework;
-import asd.Argument.AbstractArgument;
+
 import asd.Argument.Argument;
-import asd.Argument.IncompleteArgument;
 import asd.Argument.Relation;
 
 import java.util.LinkedList;
@@ -11,10 +10,10 @@ import java.util.List;
 
 public class test2 {
     public static void main(String ... args){
-        AbstractArgument a1 = new IncompleteArgument("a", IncompleteArgument.type.CERTAIN);
-        AbstractArgument c1 = new IncompleteArgument("b", IncompleteArgument.type.CERTAIN);
-        AbstractArgument a2 = new IncompleteArgument("c", IncompleteArgument.type.CERTAIN);
-        AbstractArgument b1  = new IncompleteArgument("d", IncompleteArgument.type.CERTAIN);
+        Argument a1 = new Argument("a");
+        Argument c1 = new Argument("b");
+        Argument a2 = new Argument("c");
+        Argument b1  = new Argument("d");
 
         Relation r1 = new Relation(a1, a2);
         Relation r2 = new Relation(a1, c1);
@@ -23,10 +22,11 @@ public class test2 {
 
         IncompleteAbstractArgumentationFramework AAF = new IncompleteAbstractArgumentationFramework();
 
-        AAF.addArgument(a1);AAF.addArgument(a2);
-        AAF.addArgument(c1);
-        AAF.addInteraction(r1);
-        AAF.addInteraction(r2);
+        AAF.addTypeArgument(a1, IncompleteAbstractArgumentationFramework.type.UNCERTAIN);
+        AAF.addTypeArgument(a2, IncompleteAbstractArgumentationFramework.type.UNCERTAIN);
+        AAF.addTypeArgument(c1, IncompleteAbstractArgumentationFramework.type.UNCERTAIN);
+        AAF.addTypeInteraction(r1, IncompleteAbstractArgumentationFramework.type.UNCERTAIN);
+        AAF.addTypeInteraction(r2, IncompleteAbstractArgumentationFramework.type.UNCERTAIN);
         System.out.println(AAF);
 
         AAF.removeInteraction(r1);
@@ -35,9 +35,7 @@ public class test2 {
         AAF.removeArgument(a2);
         System.out.println(AAF);
 
-        List<Relation> l = new LinkedList<>();l.add(r3);l.add(r4);
-        AAF.addArgsAndRelations(a2, l);
-        System.out.println(AAF.getArguments());
+
 
 
 

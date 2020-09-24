@@ -1,10 +1,8 @@
 package test;
 
 import asd.AF.AbstractArgumentationFramework;
-import asd.AF.IncompleteAbstractArgumentationFramework;
-import asd.Argument.AbstractArgument;
+
 import asd.Argument.Argument;
-import asd.Argument.IncompleteArgument;
 import asd.Argument.Relation;
 
 import java.util.LinkedList;
@@ -12,10 +10,10 @@ import java.util.List;
 
 public class test1 {
     public static void main(String ... args){
-        AbstractArgument a1 = new Argument("a");
-        AbstractArgument c1 = new Argument("c");
-        AbstractArgument a2 = new Argument("a");
-        AbstractArgument b1  = new Argument("d");
+        Argument a1 = new Argument("a");
+        Argument c1 = new Argument("c");
+        Argument a2 = new Argument("b");
+        Argument b1  = new Argument("d");
 
         Relation r1 = new Relation(a1, a2);
         Relation r2 = new Relation(a1, c1);

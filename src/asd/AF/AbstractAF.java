@@ -1,6 +1,5 @@
 package asd.AF;
 
-import asd.Argument.AbstractArgument;
 import asd.Argument.Argument;
 import asd.Argument.Relation;
 
@@ -14,7 +13,7 @@ import java.util.ListIterator;
 public abstract class AbstractAF implements ArgumentationFramework {
 
     public String toString(){
-        ListIterator<AbstractArgument> ita = this.listIteratorArgument();
+        ListIterator<Argument> ita = this.listIteratorArgument();
 
         ListIterator<Relation> itr = this.listIteratorRelation();
 

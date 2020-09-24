@@ -1,6 +1,5 @@
 package asd.AF;
 
-import asd.Argument.AbstractArgument;
 import asd.Argument.Argument;
 import asd.Argument.Relation;
 
@@ -25,9 +24,13 @@ public class AbstractArgumentationFramework extends  AbstractAF {
         this.R = R;
     }
 
-    /*
-    L'aggiunta di una relazione è fattibile solo se gli argomenti coinvolti
-    sono già presenti nell' insieme A dell AF
+    /**
+     * il metodo aggiunge una relazione all'Argumentation Fraework
+     *
+     * L'aggiunta di una relazione è fattibile solo se gli argomenti coinvolti
+     * sono già presenti nell' insieme A dell AF
+     * @param rel
+     * @return boolean
      */
     public boolean addInteraction(Relation rel){
         if(R.contains(rel))return false;
@@ -39,19 +42,21 @@ public class AbstractArgumentationFramework extends  AbstractAF {
         return false;
     }
 
-    /*
-    Rimuove solo una relazione esistente in (A, R) , quini r deve appartenere  R
-     */
-    public boolean removeInteraction(Relation r){
-        if(R.contains(r)){
-            R.remove(r);
+
+    public boolean removeInteraction(Relation relation){
+        if(R.contains(relation)){
+            R.remove(relation);
             return true;
         }
         return  false;
     }
 
-    @Override
-    public boolean addArgument(AbstractArgument a) {
+    /**
+     * Il metodo aggiunge un argomento che non è coinvolto in alcun tipo di relazione, all'Argumentation Framework,
+     * @param a
+     * @return boolean
+     */
+    public boolean addArgument(Argument a) {
         if(A.contains(a)){
             return false;
         }
@@ -60,7 +65,26 @@ public class AbstractArgumentationFramework extends  AbstractAF {
 
     }
 
-    public boolean addArgsAndRelations(AbstractArgument a , List<Relation> r ) {
+    @Override
+    public boolean removeArgument(Argument a) {
+        if(! A.contains(a))
+            return false;
+        A.remove(a);
+        List<Relation> rel = new LinkedList<>(this.getRelations());
+        for(Relation r : rel){
+            if (r.getSecond().equals(a) || r.getFirst().equals(a))
+                this.removeInteraction(r);
+        }
+        return true;
+    }
+
+    /**
+     * Il metodo aggiunge all' AF sia un argomento ed un insieme di relazionoi che lo convolgono
+     * @param a , argument da inserire
+     * @param r, insieme di che coinvolgono l'argomento
+     * @return true, se l'operazione va a buon fine
+     */
+    public boolean addArgsAndRelations(Argument a , List<Relation> r ) {
         this.addArgument(a);
         for(Relation rel : r ){
             if (rel.getSecond().equals(a) || rel.getFirst().equals(a))//inserisco solo le relazioni corrette
@@ -69,17 +93,7 @@ public class AbstractArgumentationFramework extends  AbstractAF {
         return true;
     }
 
-    @Override
-    public boolean removeArgument(AbstractArgument a) {
-        if(! A.contains(a))
-            return false;
-        A.remove(a);
-        for(Relation r : R){
-            if (r.getSecond().equals(a) || r.getFirst().equals(a))
-                this.removeInteraction(r);
-        }
-        return true;
-    }
+
 
 
     public List<Argument> getArguments(){
